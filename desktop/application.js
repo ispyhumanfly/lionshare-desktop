@@ -36,14 +36,14 @@ const createMainWindow = () => {
 
   const win = new electron.BrowserWindow({
     title: app.getName(),
-    show: false,
+    show: true,
     x: lastWindowState.x,
     y: lastWindowState.y,
-    width: 360,
-    maxWidth: 360,
-    minWidth: 360,
+    width: 480,
     height: lastWindowState.height,
-    minHeight: 450,
+    maxWidth: 480,
+    minWidth: 480,
+    minHeight: 480,
     maximizable: false,
     fullscreenable: false,
     frame: false,
@@ -121,11 +121,8 @@ const trackUser = async () => {
   const id = await machineId();
   const user = ua('UA-90111350-1', id, { strictCidFormat: false, https: true });
   user.pageview('/').send();
-  setInterval(
-    () => {
-      user.pageview('/').send();
-    },
-    60000 * 5
-  );
+  setInterval(() => {
+    user.pageview('/').send();
+  }, 60000 * 5);
 };
 if (!isDev) trackUser();

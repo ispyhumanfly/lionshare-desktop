@@ -15,13 +15,15 @@ export default class Ui {
 
   /* actions */
 
-  @action changeView(view) {
+  @action
+  changeView(view) {
     if (AVAILABLE_VIEWS.includes(view)) {
       this.view = view;
     }
   }
 
-  @action toggleCurrency = currency => {
+  @action
+  toggleCurrency = currency => {
     if (this.visibleCurrencies.includes(currency)) {
       this.visibleCurrencies.remove(currency);
     } else {
@@ -29,29 +31,36 @@ export default class Ui {
     }
   };
 
-  @action setSortBy = sortBy => {
+  @action
+  setSortBy = sortBy => {
     this.sortBy = sortBy;
   };
 
-  @action toggleCurrenciesAll = () => {
+  @action
+  toggleCurrenciesAll = () => {
     this.toggleCurrenciesNone(); // Clear first
     CURRENCIES.forEach(currency =>
-      this.visibleCurrencies.push(currency.symbol));
+      this.visibleCurrencies.push(currency.symbol)
+    );
   };
 
-  @action toggleCurrenciesNone = () => {
+  @action
+  toggleCurrenciesNone = () => {
     this.visibleCurrencies = [];
   };
 
-  @action setLaunchOnStartup = launchOnStartup => {
+  @action
+  setLaunchOnStartup = launchOnStartup => {
     this.launchOnStartup = launchOnStartup;
   };
 
-  @action setDockItemVisible = visible => {
+  @action
+  setDockItemVisible = visible => {
     this.dockItemVisible = visible;
   };
 
-  @action fromJSON = jsonData => {
+  @action
+  fromJSON = jsonData => {
     const parsed = JSON.parse(jsonData);
     this.view = parsed.view;
     this.visibleCurrencies.replace(parsed.visibleCurrencies);

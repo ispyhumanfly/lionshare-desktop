@@ -6,9 +6,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
 const SettingToggle = ({ children }) => (
-  <Flex className={styles.container}>
-    {children}
-  </Flex>
+  <Flex className={styles.container}>{children}</Flex>
 );
 
 const ToggleOption = ({ onClick, selected, children }) => (

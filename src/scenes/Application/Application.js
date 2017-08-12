@@ -29,11 +29,7 @@ class Application extends React.Component {
   };
 
   render() {
-    return (
-      <Flex auto>
-        {this.renderView()}
-      </Flex>
-    );
+    return <Flex auto>{this.renderView()}</Flex>;
   }
 }
 

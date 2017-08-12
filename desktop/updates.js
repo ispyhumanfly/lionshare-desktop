@@ -22,18 +22,12 @@ const scheduleUpdates = () => {
   };
 
   // Check for updates at startup and once an hour
-  setInterval(
-    () => {
-      checkForUpdates();
-    },
-    60 * 60 * 1000
-  );
-  setTimeout(
-    () => {
-      checkForUpdates();
-    },
-    10 * 1000
-  );
+  setInterval(() => {
+    checkForUpdates();
+  }, 60 * 60 * 1000);
+  setTimeout(() => {
+    checkForUpdates();
+  }, 10 * 1000);
 };
 
 export default scheduleUpdates;

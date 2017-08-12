@@ -8,7 +8,7 @@ const app = electron.app;
 let tray = null;
 
 const newTray = win => {
-  const toggleWin = () => win.isVisible() ? win.hide() : win.show();
+  const toggleWin = () => (win.isVisible() ? win.hide() : win.show());
 
   const contextMenu = electron.Menu.buildFromTemplate([
     {

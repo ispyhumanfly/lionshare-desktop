@@ -26,9 +26,7 @@ const ErrorMessage = ({ message, onRetry }) => (
         </g>
       </svg>
     </div>
-    <div className={styles.message}>
-      {message}
-    </div>
+    <div className={styles.message}>{message}</div>
     <div className={styles.button} role="button" onClick={onRetry}>
       Reload
     </div>

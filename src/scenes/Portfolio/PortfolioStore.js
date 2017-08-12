@@ -18,7 +18,8 @@ class PortfolioStore {
 
   /* computed */
 
-  @computed get editedBalances() {
+  @computed
+  get editedBalances() {
     const balances = {};
     this.rawEditedBalances.forEach((amount, currency) => {
       balances[currency] = parseFloat(amount);
@@ -27,15 +28,18 @@ class PortfolioStore {
     return asMap(balances);
   }
 
-  @computed get isLoaded() {
+  @computed
+  get isLoaded() {
     return this.prices.isLoaded;
   }
 
-  @computed get activeBalances() {
+  @computed
+  get activeBalances() {
     return this.isEditing ? this.editedBalances : this.balances;
   }
 
-  @computed get totalBalance() {
+  @computed
+  get totalBalance() {
     let value = 0.0;
 
     if (this.editMode === 'crypto') {
@@ -53,7 +57,8 @@ class PortfolioStore {
     return value;
   }
 
-  @computed get totalChange() {
+  @computed
+  get totalChange() {
     let value = 0.0;
     this.balances.forEach((amount, currency) => {
       value += this.prices.change(amount, currency);
@@ -61,7 +66,8 @@ class PortfolioStore {
     return value;
   }
 
-  @computed get assetListData() {
+  @computed
+  get assetListData() {
     const currencies = this.balances.keys();
     return currencies.map(currency => {
       const balance = this.balances.get(currency);
@@ -77,15 +83,18 @@ class PortfolioStore {
     });
   }
 
-  @computed get userDataReady() {
+  @computed
+  get userDataReady() {
     return this.balances.keys().length > 0;
   }
 
-  @computed get allowSave() {
+  @computed
+  get allowSave() {
     return this.editedBalances.keys().length > 0 && this.totalBalance > 0.0;
   }
 
-  @computed get doughnutData() {
+  @computed
+  get doughnutData() {
     const data = {
       datasets: [
         {
@@ -108,21 +117,25 @@ class PortfolioStore {
     return data;
   }
 
-  @computed get fiatCurrency() {
+  @computed
+  get fiatCurrency() {
     return 'USD';
   }
 
-  @computed get showEditCancel() {
+  @computed
+  get showEditCancel() {
     return this.userDataReady;
   }
 
-  @computed get showOnboarding() {
+  @computed
+  get showOnboarding() {
     return this.totalBalance <= 0.0 && !this.hideOnboarding;
   }
 
   /* actions */
 
-  @action toggleEdit = () => {
+  @action
+  toggleEdit = () => {
     this.isEditing = !this.isEditing;
     this.rawEditedBalances.clear();
     this.editMode = 'crypto';
@@ -131,7 +144,8 @@ class PortfolioStore {
     }
   };
 
-  @action toggleEditMode = () => {
+  @action
+  toggleEditMode = () => {
     if (this.editMode === 'crypto') {
       this.editMode = 'fiat';
       this.editedBalances.forEach((amount, currency) => {
@@ -145,13 +159,14 @@ class PortfolioStore {
       this.editedBalances.forEach((amount, currency) => {
         this.rawEditedBalances.set(
           currency,
-          amount / this.prices.convert(1.00, currency)
+          amount / this.prices.convert(1.0, currency)
         );
       });
     }
   };
 
-  @action updateBalance = event => {
+  @action
+  updateBalance = event => {
     const { name, value } = event.target;
     if (value) {
       this.rawEditedBalances.set(name, value);
@@ -160,7 +175,8 @@ class PortfolioStore {
     }
   };
 
-  @action saveEdit = () => {
+  @action
+  saveEdit = () => {
     if (this.editMode === 'fiat') this.toggleEditMode();
 
     // Clean empty values
@@ -176,11 +192,13 @@ class PortfolioStore {
     this.toggleEdit();
   };
 
-  @action toggleOnboarding = () => {
+  @action
+  toggleOnboarding = () => {
     this.hideOnboarding = true;
   };
 
-  @action fromJSON = jsonData => {
+  @action
+  fromJSON = jsonData => {
     const parsed = JSON.parse(jsonData);
     if (parsed.balances) {
       // Only set balances that are also visible, disregard others
@@ -199,9 +217,10 @@ class PortfolioStore {
 
   /* other */
 
-  toJSON = () => JSON.stringify({
-    balances: this.balances,
-  });
+  toJSON = () =>
+    JSON.stringify({
+      balances: this.balances,
+    });
 
   constructor(options) {
     // General store references

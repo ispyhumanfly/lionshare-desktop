@@ -35,15 +35,18 @@ var config = {
       { test: /\.json$/, loader: 'json-loader' },
       {
         test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+        loader:
+          'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
       },
       {
         test: /\.scss$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url!sass?outputStyle=expanded',
+        loader:
+          'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!resolve-url!sass?outputStyle=expanded',
       },
       {
         test: /\.otf$/,
-        loader: 'url-loader?mimetype=application/font-woff&name=public/fonts/[name].[ext]',
+        loader:
+          'url-loader?mimetype=application/font-woff&name=public/fonts/[name].[ext]',
       },
     ],
   },

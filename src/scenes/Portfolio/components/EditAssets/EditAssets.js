@@ -31,12 +31,9 @@ class EditAssets extends React.Component {
   };
 
   componentDidMount() {
-    this.chartUpdate = setInterval(
-      () => {
-        this.setState({ chartData: this.chartState });
-      },
-      1000
-    );
+    this.chartUpdate = setInterval(() => {
+      this.setState({ chartData: this.chartState });
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -71,11 +68,10 @@ class EditAssets extends React.Component {
   }
 
   get currencies() {
-    const {
-      visibleCurrencies,
-    } = this.props;
+    const { visibleCurrencies } = this.props;
     return CURRENCIES.filter(currency =>
-      visibleCurrencies.includes(currency.symbol));
+      visibleCurrencies.includes(currency.symbol)
+    );
   }
 
   render() {
@@ -102,7 +98,7 @@ class EditAssets extends React.Component {
 
     return (
       <Flex auto column className={styles.container}>
-        {showOnboarding &&
+        {showOnboarding && (
           <Flex align="center" justify="center" className={styles.overlay}>
             <Flex column align="center" className={styles.overlayWrapper}>
               <Flex
@@ -134,9 +130,8 @@ class EditAssets extends React.Component {
               <div className={styles.overlayHeader}>Create your portfolio</div>
               <div className={styles.overlayText}>
                 Enter the amount of each digital currency you own (or want to),
-                then{' '}
-                <span className={styles.emphasis}>save</span>
-                {' '}to start tracking.
+                then <span className={styles.emphasis}>save</span> to start
+                tracking.
               </div>
               <div
                 role="button"
@@ -146,7 +141,8 @@ class EditAssets extends React.Component {
                 Got it
               </div>
             </Flex>
-          </Flex>}
+          </Flex>
+        )}
         <Flex align="center" justify="space-between" className={styles.header}>
           <div>Total: {formatNumber(totalBalance, 'USD')}</div>
           <div className={styles.toggle} onClick={toggleEditMode} role="button">
@@ -178,20 +174,13 @@ class EditRow extends React.Component {
   onBlur = () => this.setState({ active: false });
 
   render() {
-    const {
-      currency,
-      onChange,
-      value,
-      editMode,
-      fiatCurrency,
-    } = this.props;
+    const { currency, onChange, value, editMode, fiatCurrency } = this.props;
 
     const refInput = input => {
       this.textInput = input;
     };
-    const currencySymbol = editMode === 'crypto'
-      ? currency.symbol
-      : fiatCurrency;
+    const currencySymbol =
+      editMode === 'crypto' ? currency.symbol : fiatCurrency;
 
     return (
       <Flex

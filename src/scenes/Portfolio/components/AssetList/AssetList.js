@@ -26,16 +26,7 @@ const AssetList = ({ assets }) => {
   );
 };
 
-const AssetRow = (
-  {
-    name,
-    symbol,
-    color,
-    balance,
-    nativeBalance,
-    change,
-  },
-) => {
+const AssetRow = ({ name, symbol, color, balance, nativeBalance, change }) => {
   const direction = change >= 0 ? 'up' : 'down';
 
   return (

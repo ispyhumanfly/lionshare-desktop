@@ -9,18 +9,19 @@ import ErrorMessage from 'components/ErrorMessage';
 
 import styles from './Layout.scss';
 
-const Layout = (
-  {
-    ui,
-    prices,
-    children,
-    footer,
-    alwaysLoad,
-    border = true,
-  },
-) => {
+const Layout = ({
+  ui,
+  prices,
+  children,
+  footer,
+  alwaysLoad,
+  border = true,
+}) => {
+
   const onClickPrices = () => ui.changeView('prices');
   const onClickPortfolio = () => ui.changeView('portfolio');
+  const onClickIntelligence = () => ui.changeView('intelligence');
+
   const onClickSettings = () => ui.changeView('settings');
   const openDonateLink = () =>
     shell.openExternal(
@@ -44,17 +45,24 @@ const Layout = (
           label="Portfolio"
           active={ui.view === 'portfolio'}
         />
+        <HeaderTab
+          onClick={onClickIntelligence}
+          label="Intelligence"
+          active={ui.view === 'Intelligence'}
+        />
         <SettingsTab
           onClick={onClickSettings}
           active={ui.view === 'settings'}
         />
       </Header>
       <Flex auto>
-        {prices.error && !alwaysLoad
-          ? <ErrorMessage message={prices.error} onRetry={prices.fetchData} />
-          : children}
+        {prices.error && !alwaysLoad ? (
+          <ErrorMessage message={prices.error} onRetry={prices.fetchData} />
+        ) : (
+          children
+        )}
       </Flex>
-      {(footer || prices.error) &&
+      {(footer || prices.error) && (
         <Flex align="center" justify="space-between" className={styles.footer}>
           <span
             onClick={openVersionLink}
@@ -71,7 +79,8 @@ const Layout = (
           >
             Donate
           </span>
-        </Flex>}
+        </Flex>
+      )}
     </Flex>
   );
 };

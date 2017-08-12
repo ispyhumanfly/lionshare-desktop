@@ -8,10 +8,8 @@ const cx = classNames.bind(styles);
 class ChangeHighlight extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    trigger: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]).isRequired,
+    trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
   };
 
   state = {
@@ -23,23 +21,18 @@ class ChangeHighlight extends React.Component {
     if (this.props.trigger !== nextProps.trigger) {
       this.setState({
         highlight: true,
-        direction: parseFloat(nextProps.trigger) >
-          parseFloat(this.props.trigger)
-          ? 'up'
-          : 'down',
+        direction:
+          parseFloat(nextProps.trigger) > parseFloat(this.props.trigger)
+            ? 'up'
+            : 'down',
       });
       setTimeout(() => this.setState({ highlight: false }), 2500);
     }
   }
 
   render() {
-    const {
-      children,
-    } = this.props;
-    const {
-      highlight,
-      direction,
-    } = this.state;
+    const { children } = this.props;
+    const { highlight, direction } = this.state;
 
     return (
       <span

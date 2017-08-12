@@ -12,10 +12,10 @@ import { SettingToggle, ToggleOption } from './components/SettingToggle';
 
 import styles from './Settings.scss';
 
+// eslint-disable-next-line react/prefer-stateless-function
 @inject('ui', 'prices')
 @observer
-class // eslint-disable-next-line react/prefer-stateless-function
-Settings extends React.Component {
+class Settings extends React.Component {
   static propTypes = {
     ui: PropTypes.object.isRequired,
     prices: PropTypes.object.isRequired,
@@ -80,9 +80,7 @@ Settings extends React.Component {
           </Section>
           <Section>
             <Heading>Native Currency</Heading>
-            <Setting>
-              US Dollars (USD)
-            </Setting>
+            <Setting>US Dollars (USD)</Setting>
           </Section>
           <Section>
             <Heading>Exchange</Heading>
@@ -92,7 +90,7 @@ Settings extends React.Component {
             </Setting>
           </Section>
           <Section>
-            <Heading>MacOS Preferences</Heading>
+            <Heading>macOS Preferences</Heading>
             <div className={styles.macOSPreferences}>
               <CheckboxSetting
                 label="Show dock icon"
@@ -108,7 +106,7 @@ Settings extends React.Component {
           </Section>
           <Section>
             <Heading>
-              <span>Asset List</span>
+              <span>Available Currencies</span>
               <span className={styles.headingActions}>
                 <HeadingAction onClick={ui.toggleCurrenciesAll}>
                   All
@@ -137,9 +135,7 @@ Settings extends React.Component {
 }
 
 const Section = ({ children }) => (
-  <div className={styles.section}>
-    {children}
-  </div>
+  <div className={styles.section}>{children}</div>
 );
 
 const Heading = ({ children }) => (
@@ -155,9 +151,7 @@ const HeadingAction = ({ children, onClick }) => (
 );
 
 const Setting = ({ children }) => (
-  <div className={styles.setting}>
-    {children}
-  </div>
+  <div className={styles.setting}>{children}</div>
 );
 
 const CheckboxSetting = ({ label, onChange, checked }) => (
@@ -183,33 +177,25 @@ const Link = ({ children, onClick }) => (
 );
 
 const AssetList = ({ children }) => (
-  <div className={styles.assetList}>
-    {children}
-  </div>
+  <div className={styles.assetList}>{children}</div>
 );
 
-const Asset = observer((
-  {
-    name,
-    symbol,
-    color,
-    toggleCurrency,
-    visibleCurrencies,
-  },
-) => {
-  const onChange = () => toggleCurrency(symbol);
-  const checked = visibleCurrencies.includes(symbol);
+const Asset = observer(
+  ({ name, symbol, color, toggleCurrency, visibleCurrencies }) => {
+    const onChange = () => toggleCurrency(symbol);
+    const checked = visibleCurrencies.includes(symbol);
 
-  const label = (
-    <Flex>
-      <CurrencyColor color={color} className={styles.colorDot} />
-      {name}&nbsp;<span className={styles.symbol}>({symbol})</span>
-    </Flex>
-  );
+    const label = (
+      <Flex>
+        <CurrencyColor color={color} className={styles.colorDot} />
+        {name}&nbsp;<span className={styles.symbol}>({symbol})</span>
+      </Flex>
+    );
 
-  return (
-    <CheckboxSetting label={label} onChange={onChange} checked={checked} />
-  );
-});
+    return (
+      <CheckboxSetting label={label} onChange={onChange} checked={checked} />
+    );
+  }
+);
 
 export default Settings;
